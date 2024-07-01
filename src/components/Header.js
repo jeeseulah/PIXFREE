@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { getRandomImg } from "../services/Requests";
 import Logo from "./Logo";
 import SearchGroup from "./SearchGroup";
+import HeaderBg from "../assets/header_bg.jpg";
 
 const StyledHeaderDiv = styled.div`
   background-size: cover;
@@ -14,23 +15,24 @@ const StyledHeaderDiv = styled.div`
 `;
 
 const Header = () => {
-  const [randomImg, setRandomImg] = useState("");
-  const getPictures = async () => {
-    try {
-      const picture = await getRandomImg();
-      setRandomImg(picture);
-    } catch (error) {
-      console.error(error);
-    }
-  };
+  // const [randomImg, setRandomImg] = useState("");
+  // const getPictures = async () => {
+  //   try {
+  //     const picture = await getRandomImg();
+  //     setRandomImg(picture);
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    getPictures();
-  }, []);
+  // useEffect(() => {
+  //   getPictures();
+  // }, []);
   return (
     <StyledHeaderDiv
       style={{
-        backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)), url(${randomImg})`,
+        // backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)), url(${randomImg})`,
+        backgroundImage: `linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.2)), url(${HeaderBg})`,
       }}
     >
       <Logo />

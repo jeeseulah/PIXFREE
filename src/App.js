@@ -1,7 +1,7 @@
 import "./App.scss";
 import { Routes, Route, useLocation, Outlet } from "react-router-dom";
 import PictureList from "./pages/PictureList";
-import Modal from "./pages/Modal";
+import ModalBox from "./pages/ModalBox";
 
 function App() {
   let location = useLocation();
@@ -15,7 +15,7 @@ function App() {
       </Routes>
       {backgroundLocation && (
         <Routes>
-          <Route path="/photos/:id" element={<Modal />} />
+          <Route path="/photos/:id" element={<ModalBox />} />
         </Routes>
       )}
       <Outlet />

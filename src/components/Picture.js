@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { Link, Outlet, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const StyledImgCard = styled.div`
   margin: 10px;
@@ -49,28 +49,28 @@ const StyledUserInfo = styled.div`
   }
 `;
 //full, raw, regular, small, thumb
-const Picture = ({ imageInfo }) => {
+const Picture = ({ imageInfo, imageSize }) => {
   const location = useLocation();
   return (
     <StyledImgCard>
       <Link
-        key={imageInfo.id}
-        to={`/photos/${imageInfo.id}`}
+        key={imageInfo?.id}
+        to={`/photos/${imageInfo?.id}`}
         state={{ backgroundLocation: location }} //state props으로 location객체 전달
       >
         <img
           className="imageInfo"
-          src={imageInfo.imageUrl.thumb}
+          src={imageSize}
           alt="이미지"
-          title={imageInfo.title}
+          title={imageInfo?.title}
         />
       </Link>
       <StyledUserInfo
         className="userInfo"
-        onClick={() => window.open(`${imageInfo.user.userLink}`, "_blank")}
+        onClick={() => window.open(`${imageInfo?.user?.userLink}`, "_blank")}
       >
-        <img src={imageInfo.user.profileImage} alt="프로필 이미지" />
-        <p>{imageInfo.user.userName}</p>
+        <img src={imageInfo?.user?.profileImage} alt="프로필 이미지" />
+        <p>{imageInfo?.user?.userName}</p>
       </StyledUserInfo>
     </StyledImgCard>
   );

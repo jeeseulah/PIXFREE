@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import LogoImg from "../assets/logo.png";
 
-const LogoImg = styled.img`
+const StyledLogoImg = styled.img`
   position: absolute;
   width: 11rem;
 `;
@@ -10,7 +11,7 @@ const LogoImg = styled.img`
 const Logo = () => {
   return (
     <Link to="/">
-      <LogoImg src="../logo.png" alt="로고" />
+      <StyledLogoImg src={LogoImg} alt="로고" />
     </Link>
   );
 };
