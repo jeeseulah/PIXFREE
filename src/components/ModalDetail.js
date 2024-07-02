@@ -112,7 +112,7 @@ const ModalDetail = () => {
     try {
       setLoading(true);
       const picture = await getPhotoDetail(params.id);
-      console.log("picture", picture);
+      //console.log("picture", picture);
       setImgDetail(picture.response);
       setImgRelated(picture.responseRelated);
       setLoading(false);

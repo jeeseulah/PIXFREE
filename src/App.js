@@ -5,6 +5,8 @@ import ModalBox from "./pages/ModalBox";
 function App() {
   let location = useLocation();
   let backgroundLocation = location.state?.backgroundLocation;
+  console.log("location", location);
+  console.log("backgroundLocation", backgroundLocation);
   return (
     <>
       <Routes location={backgroundLocation || location}>

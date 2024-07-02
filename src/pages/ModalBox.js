@@ -52,7 +52,7 @@ const ModalBox = () => {
     <StyledModalWrap>
       <Link to="/">
         <StyledCloseBtn>
-          <MdClose />
+          <MdClose style={{ fontSize: "28px" }} />
         </StyledCloseBtn>
       </Link>
       <StyledModalBox>

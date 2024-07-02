@@ -6,6 +6,9 @@ const StyledImgCard = styled.div`
   margin: 10px;
   display: block;
   position: relative;
+  img {
+    max-width: 100%;
+  }
   &:hover .imageInfo {
     filter: brightness(0.5);
     transition: 0.5s;

@@ -10,18 +10,18 @@ const Axios = axios.create({
   },
 });
 
-//응답 인터셉터 (중간에서 request나 response를 가로채는 기능)
-axios.interceptors.response.use(
-  (response) => {
-    return response.data;
-  },
-  (error) => {
-    console.error(error);
-    if (error.message.includes("timeout") || error?.response?.status === 504) {
-      window.alert("시간이 초과되었습니다.");
-    }
-    return Promise.reject(error); //오류 발생 시 해당 오류 객체로 Promise거부
-  }
-);
+// //응답 인터셉터 (중간에서 request나 response를 가로채는 기능)
+// axios.interceptors.response.use(
+//   (response) => {
+//     return response.data;
+//   },
+//   (error) => {
+//     console.error(error);
+//     if (error.message.includes("timeout") || error?.response?.status === 504) {
+//       window.alert("시간이 초과되었습니다.");
+//     }
+//     return Promise.reject(error); //오류 발생 시 해당 오류 객체로 Promise거부
+//   }
+// );
 
 export default Axios;

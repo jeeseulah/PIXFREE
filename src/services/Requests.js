@@ -88,19 +88,19 @@ const getPhotoDownload = async (id) => {
   }
 };
 
-const getRandomImg = async () => {
-  try {
-    const response = await axios.get(`/photos/random`);
-    return response.data.urls.regular;
-  } catch (error) {
-    console.error("getRandomImg에러 : ", error);
-    return null;
-  }
-};
+// const getRandomImg = async () => {
+//   try {
+//     const response = await axios.get(`/photos/random`);
+//     return response.data.urls.regular;
+//   } catch (error) {
+//     console.error("getRandomImg에러 : ", error);
+//     return null;
+//   }
+// };
 
 export {
   getPhotos,
-  getRandomImg,
+  // getRandomImg,
   getSearchImg,
   getPhotoDetail,
   getPhotoDownload,

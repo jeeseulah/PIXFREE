@@ -166,8 +166,6 @@ const PictureList = () => {
 
   useEffect(() => {
     query?.length > 0 ? getSearchPictures(false) : getPictures(false);
-    // (query !== null) ? getSearchPictures() : getPictures();
-    // getPictures(false);
   }, [page]); // 페이지가 변경될 때마다 새로운 이미지
 
   return (
