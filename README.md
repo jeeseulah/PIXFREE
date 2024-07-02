@@ -118,7 +118,9 @@ Unsplash 개발자 [Unsplash API](https://unsplash.com/developers)의 Open API �
 
 ### 4) 로딩 화면 구현
 
-![spinner](https://github.com/jeeseulah/PIXFREE/assets/165135312/2807d78d-878d-48bd-a448-a19dd4d9aebe)
+| 적용된 spinner 모양                                                                                     | 구현 화면                                                                                              |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| ![Spinner1](https://github.com/jeeseulah/PIXFREE/assets/165135312/6153ebc1-1a2c-42ba-b135-767280f6f2e9) | ![spinner](https://github.com/jeeseulah/PIXFREE/assets/165135312/2807d78d-878d-48bd-a448-a19dd4d9aebe) |
 
 - 다운받은 spinner gif 파일을 import하여 사용했습니다.
 - <code>useState</code>를 사용하여 Loading상태를 관리했습니다. default값을 'false'로 설정하고, loading중일 때 상태를 'true'로 변경하여 loading화면을 구현했습니다.
