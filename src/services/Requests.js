@@ -25,12 +25,23 @@ const getPhotos = async (page = 1, per_page = 10) => {
   }
 };
 
-const getSearchImg = async (page = 1, searchValue) => {
+const getSearchImg = async (page = 1, per_page = 10, searchValue) => {
   try {
     const response = await axios.get(
-      `/search/photos?page=${page}&query=${searchValue}`
+      `/search/photos?page=${page}&per_page=${per_page}&query=${searchValue}`
     );
-    return response.data;
+    return response.data.results.map((imageInfo) => ({
+      image: {
+        id: imageInfo.id,
+        title: imageInfo?.alternative_slugs?.ko,
+        imageUrl: imageInfo?.urls,
+        user: {
+          userName: imageInfo.user.name,
+          userLink: imageInfo.user.links.html,
+          profileImage: imageInfo.user.profile_image.medium, //large, medium, small
+        },
+      },
+    }));
   } catch (error) {
     console.error("getSearchImg에러 : ", error);
     return null;

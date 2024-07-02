@@ -101,11 +101,6 @@ const StyledRelatedTags = styled.div`
   }
 `;
 
-// const StyledRelatedCollections = styled.div`
-//   ${flexWrapStyle}
-//   padding-bottom: 20px;
-// `;
-
 const ModalDetail = () => {
   const [imgDetail, setImgDetail] = useState([]);
   const [imgRelated, setImgRelated] = useState([]);

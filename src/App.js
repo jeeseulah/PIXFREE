@@ -1,4 +1,3 @@
-import "./App.scss";
 import { Routes, Route, useLocation, Outlet } from "react-router-dom";
 import PictureList from "./pages/PictureList";
 import ModalBox from "./pages/ModalBox";
