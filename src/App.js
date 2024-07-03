@@ -3,16 +3,15 @@ import PictureList from "./pages/PictureList";
 import ModalBox from "./pages/ModalBox";
 
 function App() {
-  let location = useLocation();
-  let backgroundLocation = location.state?.backgroundLocation;
-  console.log("location", location);
-  console.log("backgroundLocation", backgroundLocation);
+  let currentLocation = useLocation();
+  let backgroundLocation = currentLocation.state?.backgroundLocation;
+  // console.log("location", currentLocation);
+  // console.log("backgroundLocation", backgroundLocation);
   return (
     <>
-      <Routes location={backgroundLocation || location}>
-        <Route path="/" element={<PictureList />}>
-          {/* <Route path="*" element={<NoMatch /> } /> */}
-        </Route>
+      <Routes location={backgroundLocation || currentLocation}>
+        <Route path="/" element={<PictureList />} />
+        <Route path="/photos/:id" element={<PictureList />} />
       </Routes>
       {backgroundLocation && (
         <Routes>

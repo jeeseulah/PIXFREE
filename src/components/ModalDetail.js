@@ -112,7 +112,7 @@ const ModalDetail = () => {
     try {
       setLoading(true);
       const picture = await getPhotoDetail(params.id);
-      //console.log("picture", picture);
+      // console.log("picture", picture);
       setImgDetail(picture.response);
       setImgRelated(picture.responseRelated);
       setLoading(false);
@@ -125,7 +125,7 @@ const ModalDetail = () => {
     const filename = imgDetail?.alternative_slugs?.ko + ".jpg";
     try {
       const url = await getPhotoDownload(params.id);
-      console.log("url", url);
+      // console.log("url", url);
       fetch(url, { method: "GET" })
         .then((res) => {
           return res.blob();
@@ -261,7 +261,7 @@ const ModalDetail = () => {
               </StyledRelatedTags>
             </div>
           )}
-          {imgRelated.length > 0 && (
+          {imgRelated[0].length > 0 && (
             <div>
               <h2>Related photos</h2>
               <StyledVerticalImgGroup>

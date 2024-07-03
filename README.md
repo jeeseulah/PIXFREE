@@ -231,16 +231,19 @@ imageVerticalList3.map((imageList, index) => (
 </StyledForm>
 ```
 
+- `resetState()`함수는 검색 후 하단에 이미지가 update되어야 하기 때문에, 기존에 배열에 저장되어 있는 값을 초기화해야 했습니다.
+- `form`태그를 사용했기 때문에 submit event발생 시 브라우저가 페이지를 다시 로드하는 것을 막기 위해 사용했습니다.
+
 ```jsx
 // PictureList.js ------------------------------------------------------
+const searchInputChangeHandler = (e) => {
+  setSearchQuery(e.target.value);
+};
 const searchFormHandler = (e) => {
   e.preventDefault();
   navigate(`/?search=${searchQuery}`);
   resetState();
   getSearchPictures(true);
-};
-const searchInputChangeHandler = (e) => {
-  setSearchQuery(e.target.value);
 };
 const searchKeyHandler = (e) => {
   if (e.key === "Enter") {
@@ -294,30 +297,50 @@ const location = useLocation();
 ```
 
 - `useLocation`을 사용하여 현재 페이지의 URL정보를 가지고 와서, 이 정보를 기반으로 URL경로가 존재할 경우 모달 창이 열리도록 구현했습니다.
-- `location={backgroundLocation || location}`을 사용하여, `backgroundLocation`이 존재하면 그 값을 기반으로 라우팅을 처리하고, 그렇지 않으면 현재 `location` 값을 기반으로 라우팅을 처리합니다.
+- `location={backgroundLocation || currentLocation}`을 사용하여, `backgroundLocation`이 존재하면 그 값을 기반으로 라우팅을 처리하고, 그렇지 않으면 현재 `location` 값을 기반으로 라우팅을 처리합니다.
+- `<Route path="/" element={<PictureList />} />`와 `<Route path="/photos/:id" element={<PictureList />} />`부분은 첫번째 모달을 띄울 때는 background의 주소값이 "/"이지만 모달창이 열린 상태에서 다른 이미지로 이동 할 경우 background의 주소값이 이전 모달창의 id값을 가지게 되므로 이와 같이 구현했습니다.
 
 ```jsx
 // App.js --------------------------------------------------------------
-let location = useLocation();
-let backgroundLocation = location.state?.backgroundLocation;
-return (
-  <>
-    <Routes location={backgroundLocation || location}>
-      <Route path="/" element={<PictureList />}></Route>
-    </Routes>
-    {backgroundLocation && (
-      <Routes>
-        <Route path="/photos/:id" element={<ModalBox />} />
+function App() {
+  let currentLocation = useLocation();
+  let backgroundLocation = currentLocation.state?.backgroundLocation;
+  return (
+    <>
+      <Routes location={backgroundLocation || currentLocation}>
+        <Route path="/" element={<PictureList />} />
+        <Route path="/photos/:id" element={<PictureList />} />
       </Routes>
-    )}
-    <Outlet />
-  </>
-);
+      {backgroundLocation && (
+        <Routes>
+          <Route path="/photos/:id" element={<ModalBox />} />
+        </Routes>
+      )}
+      <Outlet />
+    </>
+  );
+}
 ```
+
+- URL에 표시된 이미지의 ID값을 가져오기 위해서 useParams를 사용했습니다.
+- params값이 변경될 때마다 재렌더링 됩니다.
 
 ```jsx
 // ModalDetail.js ------------------------------------------------------
 const params = useParams();
+
+const getPictures = async () => {
+  try {
+    setLoading(true);
+    const picture = await getPhotoDetail(params.id);
+    setImgDetail(picture.response);
+    setImgRelated(picture.responseRelated);
+    setLoading(false);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 useEffect(() => {
   getPictures();
 }, [params]);
@@ -329,10 +352,16 @@ useEffect(() => {
 
 - 메인 페이지에서 스크롤한 후 반응형으로 페이지의 width사이즈를 변경할 때, 이미지가 열에 맞춰 제대로 보이지 않는 문제가 있습니다.
 - 다운로드 기능이 아직 구현 안되었습니다. blob에 대한 이해가 더 필요해 보입니다.
-- 뒤로가기 버튼 구현이 안되어있습니다.
-- 이미지 상세 페이지 모달 창을 띄우고 다른 이미지 클릭 시 뒷 배경이 없어지는 이슈가 있습니다.
+- 검색 후 뒤로가기 버튼을 클릭하면 update가 되지 않습니다.
 
 ## 4. ✴️ 느낀점
+
+이번에 처음으로 React 프로젝트를 진행하면서 새로운 기능을 추가할 때마다, React Hook들의 다양함에 대해 크게 인식하게 되었습니다. <br/>
+블로그를 찾아보면 사용했던 Hook이 최신 버전이나 업데이트 되거나 새로운 기능이 추가된 경우가 많았습니다.
+하나의 기능을 구현하는 데도 여러 가지 방법으로 존재하며, 이에 따라 어떤 Hook을 선택하여 구현해야 할지 많은 고민이 필요했습니다.<br/>
+React Hook들의 사용 방법과 각 Hook의 차이점을 정확히 이해하고, 어떤 상황에서 어떤 Hook을 사용해야 하는지에 대한 학습이 필요하다는 생각이 들었습니다.<br/>
+기능을 가져와서 사용할 때에도 이해가 부족하여 사용하지 못하는 경우도 있었습니다.<br/>
+이러한 과정에서 부족한 점을 많이 느끼고, 지속적으로 공부를 열심히 해야겠다는 다짐을 하게 되었습니다.
 
 <!-- Top Button -->
 <p style='background: black; width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; margin-left: auto;'><a href="#top" style='color: white; '>▲</a></p>
